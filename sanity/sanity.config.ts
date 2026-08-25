@@ -6,7 +6,7 @@ import {schema} from './schema'
 export default defineConfig({
   name: 'default',
   title: 'Young Boys Football Academy',
-  projectId: 'YOUR_PROJECT_ID_HERE', // Replace with your actual project ID
+  projectId: 'sd70wpwl', // Replace with your actual project ID
   dataset: 'production',
   plugins: [structureTool(), visionTool()],
   schema: {

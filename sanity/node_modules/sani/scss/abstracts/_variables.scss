@@ -1,0 +1,38 @@
+/// Z-indexes map, gathering all Z layers of the application
+/// @access public
+/// @type Map
+/// @prop {String} key - Layer's name
+/// @prop {Number} value - Z value mapped to the key
+$z-indexes: (
+    'modal': 5000,
+    'dropdown': 4000,
+    'header': 100,
+    'default': 1,
+    'below': -1,
+);
+
+// Breakpoints variable
+$phone-upper-boundary: 600px;
+$tablet-portrait-upper-boundary: 900px;
+$tablet-landscape-upper-boundary: 1200px;
+$desktop-upper-boundary: 1800px;
+
+/**
+ * A red color variable.
+ *
+ * @color
+ * @section Message Colors
+ */
+$base-color--red: #E71D36;
+$base-color--blue: #2EC4B6;
+$base-color--light: #EFFFE9;
+$base-color--dark: #011627;
+
+// COLORS
+$color--white: #fff;
+$color--black: #000;
+
+// GRID
+$grid-width: 114rem;
+$gutter-vertical: 3rem;
+$gutter-horizontal: 3rem;

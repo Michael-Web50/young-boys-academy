@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import
+    "abstracts/functions",
+    "abstracts/mixins",
+    "abstracts/variables";
+
+@import
+    "base/animations",
+    "base/base",
+    "base/typography",
+    "base/utilities";
+
+@import
+    "components/button",
+    "components/image";
+
+@import
+    "layout/grid";

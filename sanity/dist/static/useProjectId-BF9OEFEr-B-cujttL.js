@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-8BhlS34s.js";import{f as t,u as n}from"./dist-DASDr8ds.js";function r(){return t().projectId}var i=e((()=>{n()}));export{r as n,i as t};

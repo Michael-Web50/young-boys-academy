@@ -1,0 +1,1 @@
+import{i as e,n as t}from"./rolldown-runtime-8BhlS34s.js";import{Zt as n,h as r}from"./_singletons-CYhnWpwv.js";import{n as i}from"./jsx-runtime-BTvt4Tej.js";function a(){return(0,o.useContext)(r)}var o,s=t((()=>{o=e(i(),1),n()}));export{a as n,s as t};

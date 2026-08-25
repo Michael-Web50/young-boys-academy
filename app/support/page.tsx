@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/layout/Header";
-import { Heart, Trophy, Users, DollarSign, CheckCircle, Send, Mail } from "lucide-react";
+import { Heart, Trophy, Users, DollarSign, CheckCircle, Send, Mail, Loader2 } from "lucide-react";
 import { useData } from "@/lib/data-context";
 
 export default function SupportPage() {
@@ -17,6 +17,7 @@ export default function SupportPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const supportOptions = [
     { icon: Heart, title: "Donate", description: "Make a one-time or monthly donation to support our operations, equipment, and player development.", color: "bg-red-600" },
@@ -28,19 +29,60 @@ export default function SupportPage() {
   const sponsorshipTiers = [
     { name: "Bronze", amount: "₦500,000", benefits: ["Logo on training kits", "Social media mentions", "Website logo placement", "Invitation to academy events"] },
     { name: "Silver", amount: "₦1,500,000", benefits: ["All Bronze benefits", "Logo on match day jerseys", "Banner at training ground", "Featured in newsletters", "VIP access to matches"] },
-    { name: "Gold", amount: "₦3,000,000", benefits: ["All Silver benefits", "Naming rights for a team", "Exclusive sponsorship plaque", "Press conference mentions", "Priority partnership renewal", "Custom branded content"] },
+    { name: "Gold", amount: "3,000,000", benefits: ["All Silver benefits", "Naming rights for a team", "Exclusive sponsorship plaque", "Press conference mentions", "Priority partnership renewal", "Custom branded content"] },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError("");
+    setSubmitted(false);
+
+    // REPLACE THIS WITH YOUR ACTUAL WEB3FORMS ACCESS KEY
+    const accessKey = "fe939a12-8d08-40a8-a29e-b01c3f9a91bf"; 
+
+    const formDataObj = {
+      access_key: accessKey,
+      subject: `New Sponsorship Application from ${formData.companyName}`,
+      from_name: formData.contactPerson,
+      company: formData.companyName,
+      email: formData.email,
+      phone: formData.phone,
+      tier: formData.sponsorshipType,
+      message: formData.message,
+    };
+
     try {
-      await addApplication(formData);
-      setSubmitted(true);
-      setFormData({ companyName: "", contactPerson: "", email: "", phone: "", sponsorshipType: "", message: "" });
-      setTimeout(() => setSubmitted(false), 5000);
-    } catch (error) {
-      alert("There was an error submitting your application. Please try again.");
+      // 1. Send Email via Web3Forms
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formDataObj),
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        // 2. Save to Sanity Dashboard (if available)
+        try {
+          await addApplication({
+            companyName: formData.companyName,
+            contactPerson: formData.contactPerson,
+            email: formData.email,
+            phone: formData.phone,
+            sponsorshipType: formData.sponsorshipType,
+            message: formData.message,
+          });
+        } catch (sanityError) {
+          console.log("Saved locally, Sanity sync pending:", sanityError);
+        }
+
+        setSubmitted(true);
+        setFormData({ companyName: "", contactPerson: "", email: "", phone: "", sponsorshipType: "", message: "" });
+      } else {
+        setError("Failed to send application. Please try again.");
+      }
+    } catch (err) {
+      setError("Network error. Please check your connection.");
     } finally {
       setIsSubmitting(false);
     }
@@ -154,8 +196,18 @@ export default function SupportPage() {
             <div className="mb-8 bg-green-50 border-2 border-green-300 rounded-xl p-6 flex items-start gap-4">
               <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0" />
               <div>
-                <h3 className="font-bold text-green-900 mb-1">Application Submitted Successfully!</h3>
-                <p className="text-green-800 text-sm">Thank you for your interest in sponsoring Young Boys Football Academy. Our partnership team will review your application and contact you within 48 hours.</p>
+                <h3 className="font-bold text-green-900 mb-1">Application Sent Successfully!</h3>
+                <p className="text-green-800 text-sm">Thank you for your interest. We have received your application and will contact you shortly.</p>
+              </div>
+            </div>
+          )}
+
+          {error && (
+            <div className="mb-8 bg-red-50 border-2 border-red-300 rounded-xl p-6 flex items-start gap-4">
+              <div className="w-8 h-8 text-red-600 flex-shrink-0 font-bold text-xl">!</div>
+              <div>
+                <h3 className="font-bold text-red-900 mb-1">Something went wrong</h3>
+                <p className="text-red-800 text-sm">{error}</p>
               </div>
             </div>
           )}
@@ -205,7 +257,10 @@ export default function SupportPage() {
               className="w-full bg-brand-yellow text-brand-black py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
-                <>Submitting...</>
+                <>
+                  <Loader2 className="animate-spin" size={20} />
+                  Sending Application...
+                </>
               ) : (
                 <>
                   <Send size={20} />

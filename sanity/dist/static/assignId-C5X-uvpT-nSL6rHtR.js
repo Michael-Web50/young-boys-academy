@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-8BhlS34s.js";import{Jr as t,Yr as n}from"./datastores-QCSg1Xje-B9SuE2D_.js";function r(e){let t=i.get(e);if(t)return t;let r=n();return i.set(e,r),r}var i,a=e((()=>{t(),i=new WeakMap}));export{a as n,r as t};

@@ -1,0 +1,912 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "firstName",
+        "type": "string"
+      },
+      {
+        "name": "middleName",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "lastName",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "nameOnShirt",
+        "type": "string",
+        "title": "Name on Shirt"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Goalkeeper",
+              "value": "GK"
+            },
+            {
+              "title": "Center Back",
+              "value": "CB"
+            },
+            {
+              "title": "Left Back",
+              "value": "LB"
+            },
+            {
+              "title": "Right Back",
+              "value": "RB"
+            },
+            {
+              "title": "Left Wing Back",
+              "value": "LWB"
+            },
+            {
+              "title": "Right Wing Back",
+              "value": "RWB"
+            },
+            {
+              "title": "Defensive Midfielder",
+              "value": "CDM"
+            },
+            {
+              "title": "Central Midfielder",
+              "value": "CM"
+            },
+            {
+              "title": "Attacking Midfielder",
+              "value": "CAM"
+            },
+            {
+              "title": "Left Winger",
+              "value": "LW"
+            },
+            {
+              "title": "Right Winger",
+              "value": "RW"
+            },
+            {
+              "title": "Second Striker",
+              "value": "SS"
+            },
+            {
+              "title": "Center Forward",
+              "value": "CF"
+            },
+            {
+              "title": "Striker",
+              "value": "ST"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "GK",
+                  "CB",
+                  "LB",
+                  "RB",
+                  "LWB",
+                  "RWB",
+                  "CDM",
+                  "CM",
+                  "CAM",
+                  "LW",
+                  "RW",
+                  "SS",
+                  "CF",
+                  "ST"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "position",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "shirtNumber",
+        "type": "number"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Under 12",
+              "value": "U12"
+            },
+            {
+              "title": "Under 15",
+              "value": "U15"
+            },
+            {
+              "title": "Under 17",
+              "value": "U17"
+            },
+            {
+              "title": "Under 20",
+              "value": "U20"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "U12",
+                  "U15",
+                  "U17",
+                  "U20"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "ageGroup",
+        "type": "string"
+      },
+      {
+        "name": "dateOfBirth",
+        "type": "date",
+        "title": "Date of Birth"
+      },
+      {
+        "initialValue": "Nigerian",
+        "name": "nationality",
+        "type": "string"
+      },
+      {
+        "description": "e.g., 5'8\"",
+        "name": "height",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "photo",
+        "type": "image",
+        "title": "Player Photo"
+      }
+    ],
+    "name": "player",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "firstName",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "lastName",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            "Head Coach",
+            "Assistant Coach",
+            "Goalkeeper Coach",
+            "Fitness Coach",
+            "Youth Coach",
+            "Tactical Coach"
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "Head Coach",
+                  "Assistant Coach",
+                  "Goalkeeper Coach",
+                  "Fitness Coach",
+                  "Youth Coach",
+                  "Tactical Coach"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "photo",
+        "type": "image",
+        "title": "Coach Photo"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "bio",
+        "type": "text",
+        "title": "Biography"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g., CAF License A",
+        "name": "license",
+        "type": "string",
+        "title": "Coaching License"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g., 10+ Years",
+        "name": "experience",
+        "type": "string",
+        "title": "Years of Experience"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g., Tactical Training, Youth Development",
+        "name": "specialties",
+        "type": "text"
+      }
+    ],
+    "name": "coach",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "level": "error",
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "of": [],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Match Report",
+              "value": "Match Report"
+            },
+            {
+              "title": "Announcement",
+              "value": "Announcement"
+            },
+            {
+              "title": "Fixture",
+              "value": "Fixture"
+            },
+            {
+              "title": "Training",
+              "value": "Training"
+            },
+            {
+              "title": "Transfer",
+              "value": "Transfer"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "Match Report",
+                  "Announcement",
+                  "Fixture",
+                  "Training",
+                  "Transfer"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "featuredImage",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "author",
+        "type": "string"
+      }
+    ],
+    "name": "newsArticle",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Company/Organization Name"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "logo",
+        "type": "image"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Bronze",
+              "value": "Bronze"
+            },
+            {
+              "title": "Silver",
+              "value": "Silver"
+            },
+            {
+              "title": "Gold",
+              "value": "Gold"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "Bronze",
+                  "Silver",
+                  "Gold"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "tier",
+        "type": "string",
+        "title": "Sponsorship Tier"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "website",
+        "type": "url",
+        "title": "Website URL"
+      },
+      {
+        "name": "since",
+        "type": "date",
+        "title": "Sponsor Since"
+      }
+    ],
+    "name": "sponsor",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "companyName",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "contactPerson",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "email",
+        "type": "email"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "phone",
+        "type": "string",
+        "title": "Phone Number"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Bronze (₦500,000)",
+              "value": "bronze"
+            },
+            {
+              "title": "Silver (₦1,500,000)",
+              "value": "silver"
+            },
+            {
+              "title": "Gold (3,000,000)",
+              "value": "gold"
+            },
+            {
+              "title": "Custom Package",
+              "value": "custom"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "bronze",
+                  "silver",
+                  "gold",
+                  "custom"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "sponsorshipType",
+        "type": "string",
+        "title": "Sponsorship Tier"
+      },
+      {
+        "rows": 5,
+        "name": "message",
+        "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Pending",
+              "value": "pending"
+            },
+            {
+              "title": "Contacted",
+              "value": "contacted"
+            },
+            {
+              "title": "Approved",
+              "value": "approved"
+            },
+            {
+              "title": "Rejected",
+              "value": "rejected"
+            }
+          ]
+        },
+        "initialValue": "pending",
+        "name": "status",
+        "type": "string",
+        "title": "Application Status"
+      },
+      {
+        "name": "submittedAt",
+        "type": "datetime"
+      },
+      {
+        "rows": 3,
+        "description": "Notes for admin use only",
+        "name": "notes",
+        "type": "text",
+        "title": "Internal Notes"
+      }
+    ],
+    "name": "sponsorshipApplication",
+    "type": "document"
+  }
+]

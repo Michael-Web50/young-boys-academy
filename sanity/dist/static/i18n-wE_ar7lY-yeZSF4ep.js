@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["static/resources-Bque_9IH-DTQ56s03.js","static/rolldown-runtime-8BhlS34s.js"])))=>i.map(i=>d[i]);
+import{n as e}from"./rolldown-runtime-8BhlS34s.js";import{n as t,t as n}from"./preload-helper-B5HfF83V.js";var r,i,a=e((()=>{t(),r=`variants`,i={locale:`en-US`,namespace:r,resources:()=>n(()=>import(`./resources-Bque_9IH-DTQ56s03.js`),__vite__mapDeps([0,1]))}}));export{r as n,i as r,a as t};

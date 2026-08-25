@@ -1,0 +1,82 @@
+/**
+ * @atom Button Variant Shapes
+ * @section Elements > Buttons
+ * @description
+ *  Buttons for various shapes
+ * @modifiers
+ *  .btn--rounded rounded button
+ *  .btn--inverted inverted button
+ *  .btn--rounded.btn--inverted rounded and inverted button
+ * @markup
+ *  <button class="btn btn--blue">
+ *    btn--blue
+ *  </button>
+ *  <button class="btn btn--inverted btn--blue">
+ *    btn--inverted btn--blue
+ *  </button>
+ *  <button class="btn btn--rounded btn--blue">
+ *    btn--rounded btn--blue
+ *  </button>
+ *  <button class="btn btn--rounded btn--inverted btn--blue">
+ *    btn--rounded btn--inverted btn--blue
+ *  </button>
+ */
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    border: 0;
+    font-weight: 300;
+    font-size: 1.2rem;
+    cursor:pointer;
+	text: {
+        decoration: none;
+    }
+    &:focus {
+        outline: 0;
+    }
+    
+    @include prefix((
+        box-shadow: 0px 3px 6px 0px rgba($color--black, .15),
+        transition: .2s ease-in-out
+    ), webkit moz ms o);
+
+    &.btn--rounded {
+        border-radius: 2rem;
+    }
+}
+
+
+/**
+ * @atom Button Variant Colors (colorful)
+ * @section Elements > Buttons
+ * @description
+ *  Buttons for various colors (colorful).
+ * @modifiers
+ *  .btn--blue-sky button with blue sky color
+ *  .btn--orange button with orange color
+ *  .btn--yellow button with yellow color
+ *  .btn--green button with green color
+ *  .btn--purple button with purple color
+ *  .btn--blue button with blue color
+ * @markup
+ *  <button class="btn btn--blue-sky">
+ *    btn--blue-sky
+ *  </button>
+ *  <button class="btn btn--orange">
+ *    btn--orange
+ *  </button>
+ *  <button class="btn btn--yellow">
+ *    btn--yellow
+ *  </button>
+ *  <button class="btn btn--green">
+ *    btn--green
+ *  </button>
+ *  <button class="btn btn--purple">
+ *    btn--purple
+ *  </button>
+ *  <button class="btn btn--blue">
+ *    btn--blue
+ *  </button>
+ */

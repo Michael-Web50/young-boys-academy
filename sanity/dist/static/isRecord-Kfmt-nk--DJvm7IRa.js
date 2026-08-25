@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-8BhlS34s.js";function t(e){return typeof e==`object`&&!!e&&!Array.isArray(e)}var n=e((()=>{}));export{t as n,n as t};
