@@ -7,7 +7,7 @@ import PlayerProfileModal from "@/components/ui/PlayerProfileModal";
 import { useData } from "@/lib/data-context";
 
 export default function TeamsPage() {
-  const { players } = useData();
+  const { players, isLoading } = useData();
   const [activeCategory, setActiveCategory] = useState("U12");
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +37,17 @@ export default function TeamsPage() {
     "RWB": "Right Wing Back",
     "GK": "Goalkeeper"
   };
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-brand-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-brand-yellow border-t-brand-black rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-brand-darkGray">Loading players...</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <>
@@ -99,7 +110,7 @@ export default function TeamsPage() {
           ) : (
             <div className="text-center py-20">
               <p className="text-brand-darkGray text-xl">No players in this category yet.</p>
-              <p className="text-brand-darkGray/60 mt-2">Add players through the admin dashboard.</p>
+              <p className="text-brand-darkGray/60 mt-2">Check back soon for updates!</p>
             </div>
           )}
         </section>

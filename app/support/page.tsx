@@ -16,6 +16,7 @@ export default function SupportPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const supportOptions = [
     { icon: Heart, title: "Donate", description: "Make a one-time or monthly donation to support our operations, equipment, and player development.", color: "bg-red-600" },
@@ -30,12 +31,19 @@ export default function SupportPage() {
     { name: "Gold", amount: "₦3,000,000", benefits: ["All Silver benefits", "Naming rights for a team", "Exclusive sponsorship plaque", "Press conference mentions", "Priority partnership renewal", "Custom branded content"] },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addApplication(formData);
-    setSubmitted(true);
-    setFormData({ companyName: "", contactPerson: "", email: "", phone: "", sponsorshipType: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
+    setIsSubmitting(true);
+    try {
+      await addApplication(formData);
+      setSubmitted(true);
+      setFormData({ companyName: "", contactPerson: "", email: "", phone: "", sponsorshipType: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (error) {
+      alert("There was an error submitting your application. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -61,7 +69,11 @@ export default function SupportPage() {
               {sponsors.map((sponsor) => (
                 <div key={sponsor.id} className="bg-brand-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-brand-yellow">
                   <div className="w-20 h-20 bg-brand-black rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-brand-yellow font-bold text-xl">{sponsor.logo}</span>
+                    {sponsor.logo ? (
+                      <img src={sponsor.logo} alt={sponsor.name} className="w-16 h-16 object-contain" />
+                    ) : (
+                      <span className="text-brand-yellow font-bold text-xl">{sponsor.name.charAt(0)}</span>
+                    )}
                   </div>
                   <h3 className="text-sm font-bold text-brand-black mb-1">{sponsor.name}</h3>
                   <span className="text-xs text-brand-yellow font-semibold">{sponsor.tier} Sponsor</span>
@@ -187,9 +199,19 @@ export default function SupportPage() {
               <textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} rows={4} className="w-full px-4 py-3 rounded-lg bg-brand-white border border-brand-yellow/30 text-brand-black focus:border-brand-yellow focus:outline-none resize-none" placeholder="Tell us about your organization and why you want to partner with us..." />
             </div>
 
-            <button type="submit" className="w-full bg-brand-yellow text-brand-black py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2">
-              <Send size={20} />
-              Submit Application
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full bg-brand-yellow text-brand-black py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? (
+                <>Submitting...</>
+              ) : (
+                <>
+                  <Send size={20} />
+                  Submit Application
+                </>
+              )}
             </button>
             <p className="text-xs text-brand-darkGray/60 text-center mt-4 flex items-center justify-center gap-1">
               <Mail size={12} /> Your application will be sent directly to our partnership team.
