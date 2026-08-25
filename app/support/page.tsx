@@ -29,7 +29,7 @@ export default function SupportPage() {
   const sponsorshipTiers = [
     { name: "Bronze", amount: "₦500,000", benefits: ["Logo on training kits", "Social media mentions", "Website logo placement", "Invitation to academy events"] },
     { name: "Silver", amount: "₦1,500,000", benefits: ["All Bronze benefits", "Logo on match day jerseys", "Banner at training ground", "Featured in newsletters", "VIP access to matches"] },
-    { name: "Gold", amount: "3,000,000", benefits: ["All Silver benefits", "Naming rights for a team", "Exclusive sponsorship plaque", "Press conference mentions", "Priority partnership renewal", "Custom branded content"] },
+    { name: "Gold", amount: "₦3,000,000", benefits: ["All Silver benefits", "Naming rights for a team", "Exclusive sponsorship plaque", "Press conference mentions", "Priority partnership renewal", "Custom branded content"] },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,31 +38,28 @@ export default function SupportPage() {
     setError("");
     setSubmitted(false);
 
-    // REPLACE THIS WITH YOUR ACTUAL WEB3FORMS ACCESS KEY
-    const accessKey = "fe939a12-8d08-40a8-a29e-b01c3f9a91bf"; 
+    // REPLACE THIS WITH YOUR ACTUAL FORMSPREE ENDPOINT URL
+    const formEndpoint = "https://formspree.io/f/xzepnala"; 
 
-    const formDataObj = {
-      access_key: accessKey,
-      subject: `New Sponsorship Application from ${formData.companyName}`,
-      from_name: formData.contactPerson,
-      company: formData.companyName,
-      email: formData.email,
-      phone: formData.phone,
-      tier: formData.sponsorshipType,
-      message: formData.message,
-    };
+    const formDataObj = new FormData();
+    formDataObj.append("Company Name", formData.companyName);
+    formDataObj.append("Contact Person", formData.contactPerson);
+    formDataObj.append("Email", formData.email);
+    formDataObj.append("Phone", formData.phone);
+    formDataObj.append("Sponsorship Tier", formData.sponsorshipType);
+    formDataObj.append("Message", formData.message);
 
     try {
-      // 1. Send Email via Web3Forms
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch(formEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(formDataObj),
+        body: formDataObj,
+        headers: {
+          Accept: "application/json",
+        },
       });
-      const result = await response.json();
 
-      if (result.success) {
-        // 2. Save to Sanity Dashboard (if available)
+      if (response.ok) {
+        // Also save to Sanity Dashboard
         try {
           await addApplication({
             companyName: formData.companyName,
