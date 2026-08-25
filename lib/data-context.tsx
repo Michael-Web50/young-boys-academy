@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import { getPlayers, getCoaches, getNewsArticles, getSponsors, createSponsorshipApplication } from "./sanity-queries";
 import { urlFor } from "./sanity";
 
-interface Player {
+export interface Player {
   id: string;
   firstName: string;
   middleName: string;
@@ -19,7 +19,7 @@ interface Player {
   image: string;
 }
 
-interface NewsArticle {
+export interface NewsArticle {
   id: string;
   title: string;
   excerpt: string;
@@ -29,14 +29,14 @@ interface NewsArticle {
   author: string;
 }
 
-interface Sponsor {
+export interface Sponsor {
   id: string;
   name: string;
   logo: string;
   tier: string;
 }
 
-interface Coach {
+export interface Coach {
   id: string;
   firstName: string;
   lastName: string;
@@ -48,13 +48,40 @@ interface Coach {
   specialties: string;
 }
 
-interface DataContextType {
+export interface Application {
+  id: string;
+  companyName: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+  sponsorshipType: string;
+  message: string;
+  status: "pending" | "contacted" | "approved" | "rejected";
+  submittedAt: string;
+}
+
+export interface DataContextType {
   players: Player[];
   news: NewsArticle[];
   sponsors: Sponsor[];
   coaches: Coach[];
+  applications: Application[];
   isLoading: boolean;
-  addApplication: (application: any) => Promise<void>;
+  addPlayer: (player: Omit<Player, "id">) => void;
+  updatePlayer: (id: string, player: Partial<Player>) => void;
+  deletePlayer: (id: string) => void;
+  addNews: (article: Omit<NewsArticle, "id">) => void;
+  updateNews: (id: string, article: Partial<NewsArticle>) => void;
+  deleteNews: (id: string) => void;
+  addSponsor: (sponsor: Omit<Sponsor, "id">) => void;
+  updateSponsor: (id: string, sponsor: Partial<Sponsor>) => void;
+  deleteSponsor: (id: string) => void;
+  addCoach: (coach: Omit<Coach, "id">) => void;
+  updateCoach: (id: string, coach: Partial<Coach>) => void;
+  deleteCoach: (id: string) => void;
+  addApplication: (application: Omit<Application, "id" | "status" | "submittedAt">) => Promise<void>;
+  updateApplication: (id: string, updates: Partial<Application>) => void;
+  deleteApplication: (id: string) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -64,20 +91,20 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);
   const [coaches, setCoaches] = useState<Coach[]>([]);
+  const [applications, setApplications] = useState<Application[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const [playersData, coachesData, newsData, sponsorsData] = await Promise.all([
-          getPlayers(),
-          getCoaches(),
-          getNewsArticles(),
-          getSponsors(),
+          getPlayers().catch(() => []),
+          getCoaches().catch(() => []),
+          getNewsArticles().catch(() => []),
+          getSponsors().catch(() => []),
         ]);
 
-        // Transform Sanity data to match our interface
-        setPlayers(playersData.map((p: any) => ({
+        setPlayers((playersData as any[]).map((p: any) => ({
           id: p._id,
           firstName: p.firstName,
           middleName: p.middleName || "",
@@ -92,7 +119,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           image: p.photo ? urlFor(p.photo).url() : "",
         })));
 
-        setCoaches(coachesData.map((c: any) => ({
+        setCoaches((coachesData as any[]).map((c: any) => ({
           id: c._id,
           firstName: c.firstName,
           lastName: c.lastName,
@@ -104,56 +131,70 @@ export function DataProvider({ children }: { children: ReactNode }) {
           specialties: c.specialties,
         })));
 
-        setNews(newsData.map((n: any) => ({
+        setNews((newsData as any[]).map((n: any) => ({
           id: n._id,
           title: n.title,
           excerpt: n.excerpt,
-          date: new Date(n.publishedAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }),
+          date: new Date(n.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
           category: n.category,
           image: n.featuredImage ? urlFor(n.featuredImage).url() : "",
           author: n.author,
         })));
 
-        setSponsors(sponsorsData.map((s: any) => ({
+        setSponsors((sponsorsData as any[]).map((s: any) => ({
           id: s._id,
           name: s.name,
           logo: s.logo ? urlFor(s.logo).url() : "",
           tier: s.tier,
         })));
       } catch (error) {
-        console.error("Error fetching data from Sanity:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
       }
     }
-
     fetchData();
   }, []);
 
-  const addApplication = async (application: any) => {
+  const addPlayer = (player: Omit<Player, "id">) => setPlayers([...players, { ...player, id: Date.now().toString() }]);
+  const updatePlayer = (id: string, updates: Partial<Player>) => setPlayers(players.map((p) => (p.id === id ? { ...p, ...updates } : p)));
+  const deletePlayer = (id: string) => setPlayers(players.filter((p) => p.id !== id));
+
+  const addNews = (article: Omit<NewsArticle, "id">) => setNews([{ ...article, id: Date.now().toString() }, ...news]);
+  const updateNews = (id: string, updates: Partial<NewsArticle>) => setNews(news.map((n) => (n.id === id ? { ...n, ...updates } : n)));
+  const deleteNews = (id: string) => setNews(news.filter((n) => n.id !== id));
+
+  const addSponsor = (sponsor: Omit<Sponsor, "id">) => setSponsors([...sponsors, { ...sponsor, id: Date.now().toString() }]);
+  const updateSponsor = (id: string, updates: Partial<Sponsor>) => setSponsors(sponsors.map((s) => (s.id === id ? { ...s, ...updates } : s)));
+  const deleteSponsor = (id: string) => setSponsors(sponsors.filter((s) => s.id !== id));
+
+  const addCoach = (coach: Omit<Coach, "id">) => setCoaches([...coaches, { ...coach, id: Date.now().toString() }]);
+  const updateCoach = (id: string, updates: Partial<Coach>) => setCoaches(coaches.map((c) => (c.id === id ? { ...c, ...updates } : c)));
+  const deleteCoach = (id: string) => setCoaches(coaches.filter((c) => c.id !== id));
+
+  const addApplication = async (application: Omit<Application, "id" | "status" | "submittedAt">) => {
+    const newApp: Application = { ...application, id: Date.now().toString(), status: "pending", submittedAt: new Date().toISOString() };
     try {
       await createSponsorshipApplication(application);
+      setApplications([newApp, ...applications]);
     } catch (error) {
-      console.error("Error submitting application:", error);
-      throw error;
+      console.error("Error submitting to Sanity, saving locally:", error);
+      setApplications([newApp, ...applications]);
     }
   };
+  
+  const updateApplication = (id: string, updates: Partial<Application>) => setApplications(applications.map((a: Application) => (a.id === id ? { ...a, ...updates } : a)));
+  const deleteApplication = (id: string) => setApplications(applications.filter((a: Application) => a.id !== id));
 
   return (
-    <DataContext.Provider
-      value={{
-        players,
-        news,
-        sponsors,
-        coaches,
-        isLoading,
-        addApplication,
-      }}
-    >
+    <DataContext.Provider value={{
+      players, news, sponsors, coaches, applications, isLoading,
+      addPlayer, updatePlayer, deletePlayer,
+      addNews, updateNews, deleteNews,
+      addSponsor, updateSponsor, deleteSponsor,
+      addCoach, updateCoach, deleteCoach,
+      addApplication, updateApplication, deleteApplication,
+    }}>
       {children}
     </DataContext.Provider>
   );
