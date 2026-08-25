@@ -52,3 +52,9 @@ export async function createSponsorshipApplication(data: any) {
   }
   return client.create(doc)
 }
+
+// Fetch all fixtures/matches
+export async function getFixtures() {
+  const query = `*[_type == "fixture"] | order(matchDate desc)`
+  return client.fetch(query)
+}

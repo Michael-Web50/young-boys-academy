@@ -9,6 +9,7 @@ const navLinks = [
   { name: "About", href: "/about" },
   { name: "Training", href: "/training" },
   { name: "Teams", href: "/teams" },
+  { name: "Matches", href: "/matches" },
   { name: "Staff", href: "/coaching-staff" },
   { name: "News", href: "/news" },
   { name: "Support", href: "/support" },
@@ -33,35 +34,20 @@ export default function Header() {
             </h1>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-brand-white hover:text-brand-yellow transition-colors duration-300 font-medium text-sm uppercase tracking-wide"
-              >
+              <Link key={link.name} href={link.href} className="text-brand-white hover:text-brand-yellow transition-colors duration-300 font-medium text-sm uppercase tracking-wide">
                 {link.name}
               </Link>
             ))}
-            
-            <Link 
-              href="/admin" 
-              className={`p-2 rounded-full transition-colors duration-300 ${
-                isAdmin ? "bg-brand-yellow text-brand-black" : "text-brand-white/50 hover:text-brand-yellow hover:bg-brand-white/10"
-              }`}
-              title={isAdmin ? "Admin Dashboard" : "Admin Access"}
-            >
+            <Link href="/admin" className={`p-2 rounded-full transition-colors duration-300 ${isAdmin ? "bg-brand-yellow text-brand-black" : "text-brand-white/50 hover:text-brand-yellow hover:bg-brand-white/10"}`} title={isAdmin ? "Admin Dashboard" : "Admin Access"}>
               <Shield size={20} />
             </Link>
           </nav>
 
           <div className="flex items-center gap-4 md:hidden">
-            <Link href="/admin" className={`p-2 ${isAdmin ? "text-brand-yellow" : "text-brand-white/50"}`}>
-              <Shield size={20} />
-            </Link>
-            <button className="text-brand-yellow p-2" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+            <Link href="/admin" className={`p-2 ${isAdmin ? "text-brand-yellow" : "text-brand-white/50"}`}><Shield size={20} /></Link>
+            <button className="text-brand-yellow p-2" onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X size={28} /> : <Menu size={28} />}</button>
           </div>
         </div>
       </div>
@@ -70,22 +56,9 @@ export default function Header() {
         <div className="md:hidden bg-brand-darkGray border-t border-brand-yellow/20">
           <div className="px-4 py-4 space-y-3">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="block text-brand-white hover:text-brand-yellow transition-colors duration-300 font-medium py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
+              <Link key={link.name} href={link.href} className="block text-brand-white hover:text-brand-yellow transition-colors duration-300 font-medium py-2" onClick={() => setIsOpen(false)}>{link.name}</Link>
             ))}
-            <Link
-              href="/admin"
-              className="block text-brand-yellow font-bold py-2 border-t border-brand-white/10 mt-2 pt-2"
-              onClick={() => setIsOpen(false)}
-            >
-              {isAdmin ? "⚙️ Admin Dashboard" : "🔒 Admin Access"}
-            </Link>
+            <Link href="/admin" className="block text-brand-yellow font-bold py-2 border-t border-brand-white/10 mt-2 pt-2" onClick={() => setIsOpen(false)}>{isAdmin ? "⚙️ Admin Dashboard" : "🔒 Admin Access"}</Link>
           </div>
         </div>
       )}
