@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-08-25T21:30:39.778Z",
+  "createdAt": "2026-08-25T23:06:56.317Z",
   "studioVersion": "6.11.0",
   "version": 3,
   "workspaces": [
@@ -13,7 +13,7 @@
       },
       "name": "default",
       "projectId": "sd70wpwl",
-      "schema": "fab4efc9.create-schema.json",
+      "schema": "8821e8ee.create-schema.json",
       "title": "Young Boys Football Academy",
       "tools": "ef87c8fe.create-tools.json"
     }
