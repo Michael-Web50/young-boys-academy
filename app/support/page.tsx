@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/layout/Header";
-import { Heart, Trophy, Users, DollarSign, CheckCircle, Send, Mail, Loader2, Naira } from "lucide-react";
+import { Heart, Trophy, Users, DollarSign, CheckCircle, Send, Mail, Loader2, Coins } from "lucide-react";
 import { useData } from "@/lib/data-context";
 
 export default function SupportPage() {
@@ -21,7 +21,7 @@ export default function SupportPage() {
   const [error, setError] = useState("");
 
   // Formspree endpoint - REPLACE WITH YOUR ACTUAL FORMSPREE ID
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID_HERE"; 
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljenjqb"; 
 
   const supportOptions = [
     { icon: Heart, title: "General Donation", description: "Make a one-time or monthly donation of any amount to support our operations, equipment, and player development.", color: "bg-red-600" },
@@ -135,22 +135,22 @@ export default function SupportPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-brand-black/70">
             <div className="flex items-center gap-2 bg-brand-white/50 px-4 py-2 rounded-full">
-              <Naira className="w-5 h-5" />
-              <span className="font-semibold">1,000</span>
+              <Coins className="w-5 h-5" />
+              <span className="font-semibold">₦1,000</span>
               <span className="text-sm">- Training cones</span>
             </div>
             <div className="flex items-center gap-2 bg-brand-white/50 px-4 py-2 rounded-full">
-              <Naira className="w-5 h-5" />
+              <Coins className="w-5 h-5" />
               <span className="font-semibold">₦5,000</span>
               <span className="text-sm">- Water bottles</span>
             </div>
             <div className="flex items-center gap-2 bg-brand-white/50 px-4 py-2 rounded-full">
-              <Naira className="w-5 h-5" />
+              <Coins className="w-5 h-5" />
               <span className="font-semibold">₦10,000</span>
               <span className="text-sm">- Training bibs</span>
             </div>
             <div className="flex items-center gap-2 bg-brand-white/50 px-4 py-2 rounded-full">
-              <Naira className="w-5 h-5" />
+              <Coins className="w-5 h-5" />
               <span className="font-semibold">₦50,000+</span>
               <span className="text-sm">- Equipment & kits</span>
             </div>
@@ -205,7 +205,7 @@ export default function SupportPage() {
             <div className="mb-6">
               <label className="block text-brand-black font-semibold mb-2">Donation Amount (₦) - Optional</label>
               <div className="relative">
-                <Naira className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-yellow" />
+                <Coins className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-yellow" />
                 <input 
                   type="number" 
                   value={formData.donationAmount} 
