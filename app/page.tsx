@@ -8,7 +8,7 @@ export default function Home() {
     <main className="min-h-screen bg-brand-black">
       {/* HERO SECTION WITH VIDEO BACKGROUND */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
+        {/* Video Background - African Football Training */}
         <video
           autoPlay
           loop
@@ -18,7 +18,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source
-            src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4"
+            src="https://videos.pexels.com/video-files/4090372/4090372-hd_1920_1080_25fps.mp4"
             type="video/mp4"
           />
         </video>
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CORE VALUES SECTION - Replaces "More Sections Coming Soon" */}
+      {/* CORE VALUES SECTION */}
       <section className="py-24 px-4 bg-brand-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
