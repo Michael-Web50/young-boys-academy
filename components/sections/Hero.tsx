@@ -14,7 +14,7 @@ export default function Hero() {
         }}
       />
 
-      {/* Background Video */}
+      {/* Background Video - African Football Training */}
       <video
         autoPlay
         loop
@@ -23,9 +23,9 @@ export default function Hero() {
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
       >
-        {/* Using a highly reliable, fast-loading Pexels stock video */}
+        {/* Using a reliable African football training video */}
         <source
-          src="https://videos.pexels.com/video-files/5325493/5325493-hd_1920_1080_25fps.mp4"
+          src="https://videos.pexels.com/video-files/4090372/4090372-hd_1920_1080_25fps.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.
