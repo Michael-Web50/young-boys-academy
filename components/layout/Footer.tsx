@@ -51,11 +51,11 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-brand-white/70 text-sm">
                 <Phone size={16} className="text-brand-yellow flex-shrink-0" />
-                <span>+234 800 000 0000</span>
+                <a href="tel:08055912351" className="hover:text-brand-yellow transition-colors">0805 591 2351</a>
               </li>
               <li className="flex items-center gap-3 text-brand-white/70 text-sm">
                 <Mail size={16} className="text-brand-yellow flex-shrink-0" />
-                <span>info@youngboysacademy.ng</span>
+                <a href="mailto:yboysfa@gmail.com" className="hover:text-brand-yellow transition-colors">yboysfa@gmail.com</a>
               </li>
               <li className="flex items-start gap-3 text-brand-white/70 text-sm">
                 <MapPin size={16} className="text-brand-yellow flex-shrink-0 mt-0.5" />
