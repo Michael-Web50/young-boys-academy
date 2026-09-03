@@ -43,9 +43,9 @@ export const galleryItem = defineType({
       title: 'Image',
       type: 'image',
       options: {hotspot: true},
-      hidden: ({parent}) => parent?.mediaType !== 'image',
-      validation: (Rule) => Rule.required().custom((value, context) => {
-        if (context.parent?.mediaType === 'image' && !value) return 'Image is required for image media type'
+      hidden: ({ parent }: any) => parent?.mediaType !== 'image',
+      validation: (Rule) => Rule.required().custom((value: any, context: any) => {
+        if (context.parent?.mediaType === 'image' && !value) return 'Image is required'
         return true
       }),
     }),
@@ -53,7 +53,7 @@ export const galleryItem = defineType({
       name: 'videoUrl',
       title: 'Video URL (YouTube/Vimeo/Pexels)',
       type: 'url',
-      hidden: ({parent}) => parent?.mediaType !== 'video',
+      hidden: ({ parent }: any) => parent?.mediaType !== 'video',
       description: 'Paste the direct link to the video',
     }),
     defineField({
