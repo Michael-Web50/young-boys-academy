@@ -21,7 +21,7 @@ export default function SupportPage() {
   const [error, setError] = useState("");
 
   // Formspree endpoint - REPLACE WITH YOUR ACTUAL FORMSPREE ID
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljenjqb"; 
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljenjq"; 
 
   const supportOptions = [
     { icon: Heart, title: "General Donation", description: "Make a one-time or monthly donation of any amount to support our operations, equipment, and player development.", color: "bg-red-600" },
