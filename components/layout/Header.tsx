@@ -13,6 +13,7 @@ const navLinks = [
   { name: "Matches", href: "/matches" },
   { name: "Staff", href: "/coaching-staff" },
   { name: "News", href: "/news" },
+  { name: "Gallery", href: "/gallery" },
   { name: "Support", href: "/support" },
 ];
 

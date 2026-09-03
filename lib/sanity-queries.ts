@@ -58,3 +58,9 @@ export async function getFixtures() {
   const query = `*[_type == "fixture"] | order(matchDate desc)`
   return client.fetch(query)
 }
+
+// Fetch all gallery items
+export async function getGalleryItems() {
+  const query = `*[_type == "galleryItem"] | order(date desc)`
+  return client.fetch(query)
+}

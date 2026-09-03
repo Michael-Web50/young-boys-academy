@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { getPlayers, getCoaches, getNewsArticles, getSponsors, getFixtures, createSponsorshipApplication } from "./sanity-queries";
+import { getPlayers, getCoaches, getNewsArticles, getSponsors, getFixtures, getGalleryItems, createSponsorshipApplication } from "./sanity-queries";
 import { urlFor } from "./sanity";
 
 export interface Player { id: string; firstName: string; middleName: string; lastName: string; nameOnShirt: string; position: string; shirtNumber: number; ageGroup: string; dateOfBirth: string; nationality: string; height: string; image: string; }
@@ -10,9 +10,10 @@ export interface Sponsor { id: string; name: string; logo: string; tier: string;
 export interface Coach { id: string; firstName: string; lastName: string; role: string; image: string; bio: string; license: string; experience: string; specialties: string; }
 export interface Application { id: string; companyName: string; contactPerson: string; email: string; phone: string; sponsorshipType: string; message: string; status: "pending" | "contacted" | "approved" | "rejected"; submittedAt: string; }
 export interface Fixture { id: string; opponentName: string; ageGroup: string; matchDate: string; matchTime: string; location: string; isHomeGame: boolean; status: string; ourScore?: number; opponentScore?: number; }
+export interface GalleryItem { id: string; title: string; category: string; mediaType: string; image: string; videoUrl: string; date: string; description: string; }
 
 export interface DataContextType {
-  players: Player[]; news: NewsArticle[]; sponsors: Sponsor[]; coaches: Coach[]; applications: Application[]; fixtures: Fixture[]; isLoading: boolean;
+  players: Player[]; news: NewsArticle[]; sponsors: Sponsor[]; coaches: Coach[]; applications: Application[]; fixtures: Fixture[]; gallery: GalleryItem[]; isLoading: boolean;
   addPlayer: (player: Omit<Player, "id">) => void; updatePlayer: (id: string, player: Partial<Player>) => void; deletePlayer: (id: string) => void;
   addNews: (article: Omit<NewsArticle, "id">) => void; updateNews: (id: string, article: Partial<NewsArticle>) => void; deleteNews: (id: string) => void;
   addSponsor: (sponsor: Omit<Sponsor, "id">) => void; updateSponsor: (id: string, sponsor: Partial<Sponsor>) => void; deleteSponsor: (id: string) => void;
@@ -28,34 +29,32 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);
   const [coaches, setCoaches] = useState<Coach[]>([]);
   const [fixtures, setFixtures] = useState<Fixture[]>([]);
+  const [gallery, setGallery] = useState<GalleryItem[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [playersData, coachesData, newsData, sponsorsData, fixturesData] = await Promise.all([
-          getPlayers().catch(() => []), getCoaches().catch(() => []), getNewsArticles().catch(() => []), getSponsors().catch(() => []), getFixtures().catch(() => []),
+        const [playersData, coachesData, newsData, sponsorsData, fixturesData, galleryData] = await Promise.all([
+          getPlayers().catch(() => []), getCoaches().catch(() => []), getNewsArticles().catch(() => []), getSponsors().catch(() => []), getFixtures().catch(() => []), getGalleryItems().catch(() => []),
         ]);
 
         setPlayers((playersData as any[]).map((p: any) => ({ id: p._id, firstName: p.firstName, middleName: p.middleName || "", lastName: p.lastName, nameOnShirt: p.nameOnShirt, position: p.position, shirtNumber: p.shirtNumber, ageGroup: p.ageGroup, dateOfBirth: p.dateOfBirth || "", nationality: p.nationality || "Nigerian", height: p.height || "", image: p.photo ? urlFor(p.photo).url() : "" })));
         setCoaches((coachesData as any[]).map((c: any) => ({ id: c._id, firstName: c.firstName, lastName: c.lastName, role: c.role, image: c.photo ? urlFor(c.photo).url() : "", bio: c.bio, license: c.license, experience: c.experience, specialties: c.specialties })));
         setNews((newsData as any[]).map((n: any) => ({ id: n._id, title: n.title, excerpt: n.excerpt, date: new Date(n.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }), category: n.category, image: n.featuredImage ? urlFor(n.featuredImage).url() : "", author: n.author })));
         setSponsors((sponsorsData as any[]).map((s: any) => ({ id: s._id, name: s.name, logo: s.logo ? urlFor(s.logo).url() : "", tier: s.tier })));
-        
-        setFixtures((fixturesData as any[]).map((f: any) => ({
-          id: f._id,
-          opponentName: f.opponentName,
-          ageGroup: f.ageGroup,
-          matchDate: f.matchDate,
-          matchTime: f.matchTime,
-          location: f.location,
-          isHomeGame: f.isHomeGame,
-          status: f.status,
-          ourScore: f.ourScore,
-          opponentScore: f.opponentScore,
+        setFixtures((fixturesData as any[]).map((f: any) => ({ id: f._id, opponentName: f.opponentName, ageGroup: f.ageGroup, matchDate: f.matchDate, matchTime: f.matchTime, location: f.location, isHomeGame: f.isHomeGame, status: f.status, ourScore: f.ourScore, opponentScore: f.opponentScore })));
+        setGallery((galleryData as any[]).map((g: any) => ({
+          id: g._id,
+          title: g.title,
+          category: g.category,
+          mediaType: g.mediaType,
+          image: g.image ? urlFor(g.image).url() : "",
+          videoUrl: g.videoUrl || "",
+          date: new Date(g.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+          description: g.description || "",
         })));
-
       } catch (error) { console.error("Error fetching data:", error); } finally { setIsLoading(false); }
     }
     fetchData();
@@ -81,7 +80,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const deleteApplication = (id: string) => setApplications(applications.filter((a: Application) => a.id !== id));
 
   return (
-    <DataContext.Provider value={{ players, news, sponsors, coaches, applications, fixtures, isLoading, addPlayer, updatePlayer, deletePlayer, addNews, updateNews, deleteNews, addSponsor, updateSponsor, deleteSponsor, addCoach, updateCoach, deleteCoach, addApplication, updateApplication, deleteApplication }}>
+    <DataContext.Provider value={{ players, news, sponsors, coaches, applications, fixtures, gallery, isLoading, addPlayer, updatePlayer, deletePlayer, addNews, updateNews, deleteNews, addSponsor, updateSponsor, deleteSponsor, addCoach, updateCoach, deleteCoach, addApplication, updateApplication, deleteApplication }}>
       {children}
     </DataContext.Provider>
   );

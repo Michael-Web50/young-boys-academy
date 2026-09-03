@@ -45,6 +45,7 @@ export default function Footer() {
                 { name: "Teams", href: "/teams" },
                 { name: "Matches", href: "/matches" },
                 { name: "News", href: "/news" },
+                { name: "Gallery", href: "/gallery" },
                 { name: "Support", href: "/support" },
               ].map((link) => (
                 <li key={link.name}>
