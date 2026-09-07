@@ -55,7 +55,7 @@ export default function Home() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/support"
+              href="/trials"
               className="group bg-transparent border-2 border-brand-white text-brand-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-white hover:text-brand-black transition-all duration-300 flex items-center gap-2"
             >
               <Play className="w-5 h-5" />
@@ -163,7 +163,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/support"
+              href="/trials"
               className="bg-brand-black text-brand-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-darkGray transition-all duration-300 shadow-2xl"
             >
               Register for Trials

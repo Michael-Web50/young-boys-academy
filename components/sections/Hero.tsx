@@ -6,7 +6,7 @@ import { ArrowRight, Play } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Fallback Background Image (Shows while video loads or if it fails) */}
+      {/* Fallback Background Image */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
         style={{ 
@@ -14,7 +14,7 @@ export default function Hero() {
         }}
       />
 
-      {/* Background Video - African Football Training */}
+      {/* Background Video */}
       <video
         autoPlay
         loop
@@ -23,7 +23,6 @@ export default function Hero() {
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
       >
-        {/* Using a reliable African football training video */}
         <source
           src="https://videos.pexels.com/video-files/4090372/4090372-hd_1920_1080_25fps.mp4"
           type="video/mp4"
@@ -31,7 +30,7 @@ export default function Hero() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Dark Overlay for Text Readability */}
+      {/* Dark Overlay */}
       <div className="absolute inset-0 bg-brand-black/75 z-10" />
 
       {/* Content */}

@@ -61,7 +61,7 @@ export default function AboutPage() {
               Young Boys Football Academy was founded in 2020 in the heart of Surulere, Lagos, with a simple yet powerful vision: to provide young talented footballers with professional training and a real pathway to success.
             </p>
             <p>
-              Located on Sanya Street, we've grown from a small neighborhood training group to a structured academy with four age groups (U12, U15, U17, and U20), coaching staff with CAF and FIFA certifications, and a proven track record of developing players who go on to play at higher levels.
+              Located on Sanya Street, we've grown from a small neighborhood training group to a structured academy with four age groups (U12, U15, U17, and U20), and a proven track record of developing players who go on to play at higher levels.
             </p>
             <p>
               Our philosophy is built on three core pillars: <span className="text-brand-yellow font-bold">Discipline, Hardwork, and Consistency</span>. We believe that talent alone is not enough - it takes dedication, structure, and relentless effort to become a champion.
