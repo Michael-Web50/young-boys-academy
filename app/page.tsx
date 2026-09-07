@@ -54,8 +54,9 @@ export default function Home() {
               Meet Our Teams
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
+            {/* FIXED: Sponsor button now points to /support */}
             <Link
-              href="/trials"
+              href="/support"
               className="group bg-transparent border-2 border-brand-white text-brand-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-white hover:text-brand-black transition-all duration-300 flex items-center gap-2"
             >
               <Play className="w-5 h-5" />
@@ -162,6 +163,7 @@ export default function Home() {
             Trials are ongoing for all age groups. Bring your boots, your passion, and your willingness to work hard.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* FIXED: Trials button now points to /trials */}
             <Link
               href="/trials"
               className="bg-brand-black text-brand-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-darkGray transition-all duration-300 shadow-2xl"
@@ -180,4 +182,3 @@ export default function Home() {
     </main>
   );
 }
-// Force new Vercel deployment
